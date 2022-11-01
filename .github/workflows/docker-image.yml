@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 env:
-  GITHUB_TOKEN: ${{ github.token }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
@@ -26,5 +26,5 @@ jobs:
         run: |
           echo "Yes we scan"
           export REPO_URL=${{ github.repository }}
-          export API_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          export API_TOKEN=${{ secrets.API_TOKEN }}
           bash entrypoint.sh
