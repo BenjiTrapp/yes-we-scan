@@ -6,17 +6,19 @@ LABEL "com.github.actions.icon"="cloud-lightning"
 LABEL "com.github.actions.color"="Red"
 LABEL "maintainer"="BenjiTrapp <nyctophobia@protonmail.com>"
 
-RUN apk add bash curl git wget nmap --no-cache && \
+RUN apk add bash curl git wget nmap nmap-scripts --no-cache && \
     rm -f /var/cache/apk/* && \
     mkdir -p  /usr/share/nmap/scripts/ && \
     cd /usr/share/nmap/scripts/ && \
-    git clone https://github.com/vulnersCom/nmap-vulners.git && \
-    git clone https://github.com/scipag/vulscan.git && \
+    git clone https://github.com/scipag/vulscan scipag_vulscan && \
+    ln -s `pwd`/scipag_vulscan /usr/share/nmap/scripts/vulscan && \
     cd vulscan/utilities/updater/ && \
     chmod +x updateFiles.sh && \
     bash updateFiles.sh
 
-ADD containerfiles/entrypoint.sh /entrypoint.sh
-ADD containerfiles/scan.txt /scan.txt
+# WORKDIR /usr/share/nmap/scripts/
 
-ENTRYPOINT ["/entrypoint.sh"]
+ADD containerfiles/entrypoint.sh .
+ADD containerfiles/scan.txt .
+
+ENTRYPOINT ["bash entrypoint.sh"]

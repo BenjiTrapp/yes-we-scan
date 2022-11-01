@@ -12,3 +12,6 @@ clean:
 
 stop:
 		docker rm -f nmap-scanner
+
+debug:
+		docker run --rm -it --entrypoint bash nmap-scanner
