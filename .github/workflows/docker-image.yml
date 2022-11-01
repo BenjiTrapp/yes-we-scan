@@ -22,5 +22,7 @@ jobs:
     - uses: addnab/docker-run-action@v3
       with:
         image: nmap-image:latest
-        run: /entrypoint.sh
+        run: |
+          echo "Yes we scan"
+        #/entrypoint.sh
 
