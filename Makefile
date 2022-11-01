@@ -1,8 +1,8 @@
 # vim:ft=make:
 
-.PHONY : all start github
+.PHONY : build all stop
 
-all: github
+all: build
 
 build:
 		docker build -t nmap-scanner .
@@ -12,6 +12,3 @@ clean:
 
 stop:
 		docker rm -f nmap-scanner
-
-browser:
-		browse 'http://localhost:9020/vnc.html' | sh -e

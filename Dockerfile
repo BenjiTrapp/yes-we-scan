@@ -16,5 +16,7 @@ RUN apk add bash curl git wget nmap --no-cache && \
     chmod +x updateFiles.sh && \
     bash updateFiles.sh
 
-ADD entrypoint.sh /entrypoint.sh
+ADD containerfiles/entrypoint.sh /entrypoint.sh
+ADD containerfiles/scan.txt /scan.txt
+
 ENTRYPOINT ["/entrypoint.sh"]
