@@ -21,4 +21,6 @@ RUN apk add bash curl git wget nmap nmap-scripts --no-cache && \
 ADD containerfiles/entrypoint.sh .
 ADD containerfiles/scan.txt .
 
+RUN chmod ugo+x entrypoint.sh
+
 ENTRYPOINT ["bash entrypoint.sh"]
