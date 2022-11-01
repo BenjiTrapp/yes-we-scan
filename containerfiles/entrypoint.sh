@@ -13,6 +13,7 @@ function create_gh_issue_with_scan_results() {
     body=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
     payload="{\"title\":\"$title\",\"body\":\"$body\"}"
    # curl -i -H "Authorization: token $GITHUB_TOKEN" -d "$payload" $ISSUES_URL
+    env
     curl --request POST \
           --url https://api.github.com/repos/${REPO_URL}/issues \
           --header 'authorization: Bearer ${GITHUB_TOKEN}' \
