@@ -13,7 +13,7 @@ function create_gh_issue_with_scan_results() {
     payload="{\"title\":\"$title\",\"body\":\"$body\"}"
     
     curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/issues \
+          --url https://api.github.com/repos/${REPO_URL}/issues \
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
