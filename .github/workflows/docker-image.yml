@@ -22,11 +22,11 @@ jobs:
         push: false
     - uses: addnab/docker-run-action@v3
       env:
-        API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        API_TOKEN: ${{ secrets.API_TOKEN }}
       with:
         image: nmap-image:latest
         run: |
           echo "Yes we scan"
           export REPO_URL=${{ github.repository }}
-          export API_TOKEN=${{ secrets.API_TOKEN }}
+          export GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           bash entrypoint.sh
