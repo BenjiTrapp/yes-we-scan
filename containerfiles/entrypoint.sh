@@ -14,7 +14,7 @@ function create_gh_issue_with_scan_results() {
     
     curl --request POST \
           --url https://api.github.com/repos/${REPO_URL}/issues \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'authorization: Bearer ${API_TOKEN}' \
           --header 'content-type: application/json' \
           --data '{
             "title": "$title",
