@@ -4,7 +4,7 @@ ISSUES_URL="https://github.com/BenjiTrapp/yes-we-scan/issues"
 
 
 function yes_we_scan() {
-    nmap --script nmap-vulners --script=vulscan/vulscan.nse --script-args vulscandb=exploitdb.csv -sV --open -iL scan.txt --oN outputfile.txt
+    nmap --script=vulscan/vulscan.nse --script-args vulscandb=exploitdb.csv -sV --open -iL scan.txt --oN outputfile.txt
 }
 
 function create_gh_issue_with_scan_results() {
