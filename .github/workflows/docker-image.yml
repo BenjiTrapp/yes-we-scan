@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  build:
+    permissions:
+      contents: read
+      packages: write
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: docker/build-push-action@v2
+      with:
+        tags: nmap-image:latest
+        push: false
+    - uses: addnab/docker-run-action@v3
+      with:
+        image: nmap-image:latest
+        run: /entrypoint.sh
+
