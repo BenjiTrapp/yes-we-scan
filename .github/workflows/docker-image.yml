@@ -25,5 +25,6 @@ jobs:
         image: nmap-image:latest
         run: |
           echo "Yes we scan"
+          echo "${{ github.repository }}"
           export GITHUB_TOKEN=${{ github.token }}
           bash entrypoint.sh
