@@ -26,5 +26,5 @@ jobs:
         run: |
           echo "Yes we scan"
           export REPO_URL=${{ github.repository }}
-          export API_TOKEN=${{ secrets.API_TOKEN }}
+          export API_TOKEN=${{ secrets.ApiToken }}
           bash entrypoint.sh
