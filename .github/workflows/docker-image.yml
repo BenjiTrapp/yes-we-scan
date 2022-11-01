@@ -21,6 +21,8 @@ jobs:
         tags: nmap-image:latest
         push: false
     - uses: addnab/docker-run-action@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         image: nmap-image:latest
         run: |
