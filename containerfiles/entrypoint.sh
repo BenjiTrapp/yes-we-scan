@@ -26,7 +26,7 @@ function create_gh_issue_with_scan_results() {
 
 function main() {
     yes_we_scan
-    create_gh_issue_with_scan_results
+    # create_gh_issue_with_scan_results
 }
 
 main
