@@ -4,17 +4,13 @@ on:
   push:
     branches: [ "main" ]
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   build:
+    runs-on: ubuntu-latest
     permissions:
       issues: write
       contents: read
       packages: write
-    runs-on: ubuntu-latest
-
     steps:
     - uses: docker/build-push-action@v2
       with:
@@ -22,11 +18,10 @@ jobs:
         push: false
     - uses: addnab/docker-run-action@v3
       env:
-        API_TOKEN: ${{ secrets.API_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO_URL: ${{ github.repository }}
       with:
         image: nmap-image:latest
         run: |
           echo "Yes we scan"
-          export REPO_URL=${{ github.repository }}
-          export GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           bash entrypoint.sh
