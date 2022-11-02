@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO_URL: ${{ github.repository }}
     permissions:
       issues: write
       contents: read
@@ -17,11 +20,11 @@ jobs:
         tags: nmap-image:latest
         push: false
     - uses: addnab/docker-run-action@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.API_TOKEN }}
-        REPO_URL: ${{ github.repository }}
+
       with:
         image: nmap-image:latest
         run: |
           echo "Yes we scan"
+          export GITHUB_TOKEN=${{ env.GITHUB_TOKEN }}
+          export GITHUB_TOKEN=${{ env.REPO_URL }}
           bash entrypoint.sh
