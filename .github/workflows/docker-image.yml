@@ -25,6 +25,7 @@ jobs:
         image: nmap-image:latest
         run: |
           echo "Yes we scan"
-          export GITHUB_TOKEN=${{ env.GITHUB_TOKEN }}
-          export GITHUB_TOKEN=${{ env.REPO_URL }}
+          export GITHUB_TOKEN=${{ GITHUB_TOKEN }}
+          export REPO_URL=${{ REPO_URL }}
           bash entrypoint.sh
+          cat /tmp/outputfile.txt
