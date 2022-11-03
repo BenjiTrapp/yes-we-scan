@@ -27,7 +27,7 @@ jobs:
           echo "Yes we scan"
           bash entrypoint.sh
           
-          test=$(cat /tmp/outputfile.txt)
+          test=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
           echo $test
           
           curl -v --request POST \
