@@ -27,8 +27,10 @@ jobs:
           echo "Yes we scan"
           bash entrypoint.sh
           
+          echo "========================================================"
           test=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
           echo $test
+          echo "========================================================"
           
           curl -v --request POST \
                --url https://api.github.com/repos/${{ github.repository }}/issues \
