@@ -27,7 +27,8 @@ jobs:
           echo "Yes we scan"
           bash entrypoint.sh
           
-          test="blabla"
+          test=$(cat /tmp/outputfile.txt)
+          echo $test
           
           curl -v --request POST \
                --url https://api.github.com/repos/${{ github.repository }}/issues \
