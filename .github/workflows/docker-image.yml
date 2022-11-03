@@ -28,7 +28,7 @@ jobs:
           bash entrypoint.sh
           
           echo "========================================================"
-          test=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
+          test=$(sed 's/|/\n&/g' /tmp/outputfile.txt)
           echo $test
           echo "========================================================"
           
@@ -38,7 +38,7 @@ jobs:
                --header 'content-type: application/json' \
                --data '{
                   "title": "Yes we scanned",
-                  "body": "$test"
+                  "body": $test
                   }' \
                --fail  
           
