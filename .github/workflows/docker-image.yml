@@ -20,10 +20,13 @@ jobs:
         tags: nmap-image:latest
         push: false
     - uses: addnab/docker-run-action@v3
-
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         image: nmap-image:latest
         run: |
+          gh api /octocat
+          
           echo "Yes we scan"
           bash entrypoint.sh
           
