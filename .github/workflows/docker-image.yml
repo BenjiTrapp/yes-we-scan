@@ -26,7 +26,6 @@ jobs:
           bash entrypoint.sh
           
           echo "========================================================"
-          test=$(sed 's/|/\n&/g' /tmp/outputfile.txt)
           now=$(date "+%D %T")
           title="Yes we scanned on $now"
           test2=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
@@ -38,10 +37,6 @@ jobs:
                --url https://api.github.com/repos/${{ github.repository }}/issues \
                --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                --header 'content-type: application/json' \
-               --data "{\"title\": \"$title\", \"body\": \"Test\"}" \            
-               #--data '{
-               #   "title": "Yes we scanned",
-               #   "body": "Test"
-               #   }' \
+               --data "{\"title\": \"$title\", \"body\": \"$test2\"}" \            
                --fail  
           
