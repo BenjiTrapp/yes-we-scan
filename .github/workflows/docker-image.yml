@@ -31,7 +31,7 @@ jobs:
           echo "========================================================"
           test=$(sed 's/|/\n&/g' /tmp/outputfile.txt)
           test2=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
-          echo $test
+          echo $test2
           echo "========================================================"
           
           curl -v --request POST \
