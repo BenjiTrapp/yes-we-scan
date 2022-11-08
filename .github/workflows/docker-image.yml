@@ -20,12 +20,9 @@ jobs:
         tags: nmap-image:latest
         push: false
     - uses: addnab/docker-run-action@v3
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         image: nmap-image:latest
         run: |
-          echo "Yes we scan"
           bash entrypoint.sh
           
           echo "========================================================"
@@ -42,7 +39,7 @@ jobs:
                --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                --header 'content-type: application/json' \
                --data '{
-                  "title": $title,
+                  "title": "Yes we scanned",
                   "body": "Test"
                   }' \
                --fail  
