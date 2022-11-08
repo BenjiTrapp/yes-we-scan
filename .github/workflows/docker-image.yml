@@ -25,8 +25,6 @@ jobs:
       with:
         image: nmap-image:latest
         run: |
-          gh api /octocat
-          
           echo "Yes we scan"
           bash entrypoint.sh
           
