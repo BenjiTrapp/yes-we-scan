@@ -38,9 +38,10 @@ jobs:
                --url https://api.github.com/repos/${{ github.repository }}/issues \
                --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                --header 'content-type: application/json' \
-               --data '{
-                  "title": "Yes we scanned",
-                  "body": "Test"
-                  }' \
+               --data "{\"title\": \"$title\", \"body\": \"Test\"}" \            
+               #--data '{
+               #   "title": "Yes we scanned",
+               #   "body": "Test"
+               #   }' \
                --fail  
           
