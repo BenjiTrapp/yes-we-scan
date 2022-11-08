@@ -32,6 +32,7 @@ jobs:
           
           echo "========================================================"
           test=$(sed 's/|/\n&/g' /tmp/outputfile.txt)
+          test2=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
           echo $test
           echo "========================================================"
           
@@ -40,7 +41,7 @@ jobs:
                --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                --header 'content-type: application/json' \
                --data '{
-                  "title": "Yes we scanned",
+                  "title": "NMAP Scan on $(date "+%D %T")",
                   "body": $test
                   }' \
                --fail  
