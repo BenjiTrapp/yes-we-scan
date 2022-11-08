@@ -40,6 +40,4 @@ jobs:
                --url https://api.github.com/repos/${{ github.repository }}/issues \
                --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                --header 'content-type: application/json' \
-               --data "{\"title\": \"$title\", \"body\": \"$test\"}" \            
-               --fail  
-          
+               --data "{\"title\": \"$title\", \"body\": \"Lorem Ipsum Dolores \"}" \            
