@@ -40,7 +40,7 @@ jobs:
                --header 'content-type: application/json' \
                --data '{
                   "title": "NMAP Scan on $(date "+%D %T")",
-                  "body": $test
+                  "body": "$test"
                   }' \
                --fail  
           
