@@ -30,7 +30,8 @@ jobs:
           
           echo "========================================================"
           test=$(sed 's/|/\n&/g' /tmp/outputfile.txt)
-          title="Yes we scanned on " $(date "+%D %T")
+          now=$(date "+%D %T")
+          title="Yes we scanned on $now"
           test2=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
           echo $test2
           echo $title
