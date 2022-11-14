@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine
 
 LABEL "com.github.actions.name"="nmap-scanner"
 LABEL "com.github.actions.description"="Yes we scan - GitHub Action powerd nmap scanner"
@@ -6,7 +6,7 @@ LABEL "com.github.actions.icon"="cloud-lightning"
 LABEL "com.github.actions.color"="Red"
 LABEL "maintainer"="BenjiTrapp <nyctophobia@protonmail.com>"
 
-RUN apk add bash curl git wget nmap nmap-scripts --no-cache && \
+RUN apk add bash curl git wget nmap nmap-scripts jq --no-cache && \
     rm -f /var/cache/apk/* && \
     mkdir -p  /usr/share/nmap/scripts/ && \
     cd /usr/share/nmap/scripts/ && \
