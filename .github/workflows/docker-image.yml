@@ -29,15 +29,15 @@ jobs:
           now=$(date "+%D %T")
           title="Yes we scanned on $now"
           test2=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
-          echo $test2
-          echo $title
-          test=$(cat /tmp/outputfile.txt)
+          output=$(cat /tmp/outputfile.txt)
           echo "========================================================"
-          
-          jq -h
           
           curl -v --request POST \
                --url https://api.github.com/repos/${{ github.repository }}/issues \
                --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                --header 'content-type: application/json' \
-               --data "{\"title\": \"$title\", \"body\": \"Lorem Ipsum Dolores \"}" \            
+               --data $(jq --null-input \
+                           --arg title "Yes we scanned on $now" \
+                           --arg body "$output" \
+                          '{"title": $title, "body": $body}')
+    # --data "{\"title\": \"$title\", \"body\": \"Lorem Ipsum Dolores \"}"          
