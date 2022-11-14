@@ -31,13 +31,16 @@ jobs:
           test2=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
           output=$(cat /tmp/outputfile.txt)
           echo "========================================================"
+          data=$(jq --null-input \
+                   --arg title "Yes we scanned on $now" \
+                   --arg body "$output" \
+                  '{"title": $title, "body": $body}')
+                  
+          echo $data | jq
           
           curl -v --request POST \
                --url https://api.github.com/repos/${{ github.repository }}/issues \
                --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                --header 'content-type: application/json' \
-               --data $(jq --null-input \
-                           --arg title "Yes we scanned on $now" \
-                           --arg body "$output" \
-                          '{"title": $title, "body": $body}')
+               --data $data
     # --data "{\"title\": \"$title\", \"body\": \"Lorem Ipsum Dolores \"}"          
