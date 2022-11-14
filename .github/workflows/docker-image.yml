@@ -36,7 +36,7 @@ jobs:
           echo "========================================================"
           data=$(jq --null-input \
                    --arg title "Yes we scanned on $now" \
-                   --arg body "$datafile" \
+                   --arg body $(echo $datafile | base64) \
                   '{"title": $title, "body": $body}')
                   
           echo $datafile
