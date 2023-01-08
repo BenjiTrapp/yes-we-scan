@@ -38,6 +38,9 @@ jobs:
           
           gh auth login
 
+          cd /tmp
+          gh repo clone BenjiTrapp/yes-we-scan
+
           gh issue create --title "${title}" --body-file /tmp/outputfile.txt
 
           # curl -v --request POST \
