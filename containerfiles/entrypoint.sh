@@ -18,15 +18,15 @@ function create_gh_issue_with_scan_results() {
           --header 'authorization: Bearer ${GITHUB_TOKEN}' \
           --header 'content-type: application/json' \
           --data '{
-            "title": "${title}",
-            "body": "${body}"
+                "title": "Yes we scanned",
+                "body": "Test"
             }' \
           --fail  
 }
 
 function main() {
     yes_we_scan
-    # create_gh_issue_with_scan_results
+    create_gh_issue_with_scan_results
 }
 
 main

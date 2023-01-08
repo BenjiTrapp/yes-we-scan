@@ -6,7 +6,7 @@ LABEL "com.github.actions.icon"="cloud-lightning"
 LABEL "com.github.actions.color"="Red"
 LABEL "maintainer"="BenjiTrapp <nyctophobia@protonmail.com>"
 
-RUN apk add bash curl git wget nmap nmap-scripts jq --no-cache && \
+RUN apk add bash curl git wget nmap nmap-scripts jq github-cli --no-cache && \
     rm -f /var/cache/apk/* && \
     mkdir -p  /usr/share/nmap/scripts/ && \
     cd /usr/share/nmap/scripts/ && \
