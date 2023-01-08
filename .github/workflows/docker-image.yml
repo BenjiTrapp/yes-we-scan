@@ -38,7 +38,7 @@ jobs:
           
           gh auth login
 
-          gh issue create --title $title --body-file /tmp/outputfile.txt
+          gh issue create --title "${title}" --body-file /tmp/outputfile.txt
 
           # curl -v --request POST \
           #     --url https://api.github.com/repos/${{ github.repository }}/issues \
