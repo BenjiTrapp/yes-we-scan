@@ -35,6 +35,7 @@ jobs:
           data=$(cat /tmp/outputfile.txt)
           
           echo "data=$data" >> $GITHUB_OUTPUT
+          echo "title=$title" >> $GITHUB_OUTPUT
   push:
       runs-on: ubuntu-latest
       needs: build
