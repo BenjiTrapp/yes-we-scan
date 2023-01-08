@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       data: ${{ steps.nmap.outputs.data }}
-      title: ${{ steps.nmap}}
+      title: ${{ steps.nmap.outputs.title}}
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       REPO_URL: ${{ github.repository }}
