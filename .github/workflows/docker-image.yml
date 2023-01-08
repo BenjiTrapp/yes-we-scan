@@ -37,14 +37,15 @@ jobs:
           echo "========================================================"
           
           gh auth login
-          gh gist create /tmp/outputfile.txt -d "${title}"
 
-          curl -v --request POST \
-              --url https://api.github.com/repos/${{ github.repository }}/issues \
-              --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-              --header 'content-type: application/json' \
-              --data '{
-                  "title": "${title}",
-                  "body": "${tmp}"
-                  }' \
-              --fail  
+          gh issue create --title $title --body-file /tmp/outputfile.txt
+
+          # curl -v --request POST \
+          #     --url https://api.github.com/repos/${{ github.repository }}/issues \
+          #     --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          #     --header 'content-type: application/json' \
+          #     --data '{
+          #         "title": "${title}",
+          #         "body": "${tmp}"
+          #         }' \
+          #     --fail  
