@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      data: ${{ steps.nmap.outputs.data }}
+      title: ${{ steps.nmap}}
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       REPO_URL: ${{ github.repository }}
@@ -16,35 +19,40 @@ jobs:
       packages: write
     steps:
     - uses: docker/build-push-action@v2
+      id: push
       with:
         tags: nmap-image:latest
         push: false
     - uses: addnab/docker-run-action@v3
+      id: nmap
       with:
         image: nmap-image:latest
         run: |
           bash entrypoint.sh
           
-          echo "========================================================"
           now=$(date "+%D %T")
           title="Yes we scanned on $now"
-          test2=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
-          output=$(cat /tmp/outputfile.txt)
+          data=$(cat /tmp/outputfile.txt)
           
-          datafile=$(jq -R -s '.' < /tmp/outputfile.txt | base64)
-          
-          echo "========================================================"
-          data=$(jq --null-input \
-                   --arg title "Yes we scanned on $now" \
-                   --arg body "$datafile" \
-                  '{"title": $title, "body": $body}')
-                  
-          echo $data
+          echo "data=$data" >> $GITHUB_OUTPUT
+  push:
+      runs-on: ubuntu-latest
+      needs: build
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO_URL: ${{ github.repository }}
+      permissions:
+        issues: write
+        contents: read
+        packages: write
+      steps:
+        - run: echo ${{ needs.build.outputs.data }} >> /tmp/data.txt
+        - uses: exuanbo/actions-deploy-gist@v1
+          id: gist
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            gist_id: d59f4ff64cadbc8f25f218ea5acaa35e
+            file_path: /tmp/data.txt
+            file_type: binary
+
         
-          curl -v --request POST \
-               --url https://api.github.com/repos/${{ github.repository }}/issues \
-               --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-               --header 'content-type: application/json' \
-               --data $data
-               
-    # --data "{\"title\": \"$title\", \"body\": \"Lorem Ipsum Dolores \"}"          

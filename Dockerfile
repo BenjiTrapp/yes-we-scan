@@ -16,8 +16,6 @@ RUN apk add bash curl git wget nmap nmap-scripts jq --no-cache && \
     chmod +x updateFiles.sh && \
     bash updateFiles.sh
 
-# WORKDIR /usr/share/nmap/scripts/
-
 ADD containerfiles/entrypoint.sh .
 ADD containerfiles/scan.txt .
 
