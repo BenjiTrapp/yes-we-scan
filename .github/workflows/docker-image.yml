@@ -25,6 +25,7 @@ jobs:
         run: |
           bash entrypoint.sh
           
+          export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
           echo "========================================================"
 
@@ -32,9 +33,10 @@ jobs:
           now=$(date "+%D %T")
           title="Yes we scanned on $now"
           test2=$(sed '1d;s/"/\\"/g;:a;N;$!ba;s/\n/\\n/g' /tmp/outputfile.txt)
-          cat /tmp/outputfile.txt
+          tmp=$(cat /tmp/outputfile.txt)
           echo "========================================================"
           
+          gh auth login
           gh gist create /tmp/outputfile.txt -d "${title}"
 
           curl -v --request POST \
@@ -43,6 +45,6 @@ jobs:
               --header 'content-type: application/json' \
               --data '{
                   "title": "${title}",
-                  "body": "Test"
+                  "body": "${tmp}"
                   }' \
               --fail  
