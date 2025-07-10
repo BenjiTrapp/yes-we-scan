@@ -9,5 +9,4 @@ After performing a push into the master branch, the GitHub Workflow get's trigge
 <img width="200" src="/static/yws.jpg">
 </p>
 
-
 Like what you see here? Please leave a star and check out my [blog](https://benjitrapp.github.io).
